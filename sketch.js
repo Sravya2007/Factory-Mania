@@ -29,9 +29,9 @@ function preload() {
 function setup() {
   createCanvas(1800,800);
 
-  prodMachine = createSprite(390, 400, 200, 750);
+  prodMachine = createSprite(395, 400, 200, 750);
   prodMachine.addImage(prodImg);
-  prodMachine.scale = 1.9;
+  prodMachine.scale = 1.93;
 
   belt1 = createSprite(800, 100);
   belt1.addImage("beltImg", beltImg);
