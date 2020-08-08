@@ -130,10 +130,10 @@ function setup() {
 function draw() {
   background("Black");
 
-  if(frameCount % 100 === 0) {
+  if(frameCount === 100|| wasteDestroy() === true) {
     waste = createSprite(500, 100);
     waste.scale = 0.8;
-    waste.life = 284;
+    //will change during adaptivity
     waste.velocityX = 3;
 
     rand = Math.round(random(1, 5));
@@ -211,7 +211,14 @@ function mouseDragged() {
   if((waste.x <= 1430 && waste.x >= 500) && (waste.y > 0 && waste.y < 800)) {
     waste.x = mouseX;
     waste.y = mouseY;
+  }
+}
+
+function wasteDestroy() {
+  if(waste.x >= 1430) {
+    waste.destroy();
+    return true;
   } else {
-    waste.visible = false;
+    return false;
   }
 }
