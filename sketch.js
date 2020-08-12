@@ -10,10 +10,11 @@ var bioImg, glassImg, metalImg, paperImg, plasticImg;
 var rand, rand1, waste, waste1;
 var openlid1, openlid2, openlid3, openlid4, openlid5;
 var openlid1Img, openlid2Img, openlid3Img, openlid4Img, openlid5Img;
-var player, playerImg;
+var player, playerImg, playerImg1;
 var points;
 var anim;
 var gameState = "Start";
+var fade, fadeAmount = 1;
 
 function preload() {
   prodImg = loadImage("Images/Producing Machine.png");
@@ -39,6 +40,7 @@ function preload() {
   openlid5Img = loadImage("Images/Plastic Open Lid.png");
 
   playerImg = loadImage("Images/PlayerImg.png");
+  playerImg1 = loadImage("Images/PlayerImg1.png");
 }
 
 function setup() {
@@ -126,7 +128,7 @@ function setup() {
   openlid5.addImage("openLid", openlid5Img);
 
   player = createSprite(500, 500);
-  player.addImage("Player", playerImg);
+  player.visible = false;
   player.scale = 0.5;
 }
 
@@ -141,7 +143,17 @@ function draw() {
     if(mouseX <= 1000 && mouseX >= 900) {
       player.x = mouseX;
       player.y = mouseY;
+      player.visible = true;
     }
+ 
+    if(mouseX < 900 && mouseX > 800) {
+      player.addImage(playerImg);
+      player.visible = true;
+    } else if(mouseX < 1000 && mouseX > 900){
+      player.addImage(playerImg1);
+      player.visible = true;
+    }
+
     if(frameCount === 100 ||wasteDestroy() === true) {     
 
       waste = createSprite(300, 400);
