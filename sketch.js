@@ -40,7 +40,7 @@ function preload() {
   openlid5Img = loadImage("Images/Plastic Open Lid.png");
 
   playerImg = loadImage("Images/PlayerImg.png");
-  playerImg1 = loadImage("Images/PlayerImg1.png");
+  playerImg1 = loadImage("Images/playerImg1.png");
 }
 
 function setup() {
