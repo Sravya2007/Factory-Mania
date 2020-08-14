@@ -140,7 +140,7 @@ function draw() {
   }
 
   if(gameState === "Start") {
-    if(mouseX <= 1000 && mouseX >= 900) {
+    if(mouseX <= 1000 && mouseX >= 900 && mouseY >= 100 && mouseY <= 700) {
       player.x = mouseX;
       player.y = mouseY;
       player.visible = true;
@@ -158,7 +158,7 @@ function draw() {
 
       waste = createSprite(300, 400);
       waste.scale = 0.8;
-      waste.velocityX = 6 + 3*points/10;
+      waste.velocityX = 6 + 3*points/5;
     
       rand = Math.round(random(1, 5));
       switch(rand) {
@@ -250,11 +250,36 @@ function draw() {
 }
 
 function mouseDragged() {
-  if((waste.x <= 1100 && waste.x >= 800) && ((waste.y <= 700 && waste.y >= 100))) {
     waste.x = mouseX;
     waste.y = mouseY;
-  }
 }
+
+function mouseReleased() {
+  if(waste.isTouching(belt1) && waste.y > -100 && waste.y <= 175) {
+    waste.y = 100;
+    console.log("waste.isTouching(belt1)");
+  }
+
+  if(waste.isTouching(belt2) && waste.y > 175 && waste.y <= 325) {
+    waste.y = 250;
+    console.log("waste.isTouching(belt2)")
+  }
+
+  if(waste.isTouching(beltExt3) && waste.y > 325 && waste.y <= 475) {
+    waste.y = 400;
+    console.log("waste.isTouching(beltExt3)")
+  }
+
+  if(waste.isTouching(belt4) && waste.y > 475 && waste.y <= 625) {
+    waste.y = 550;
+    console.log("waste.isTouching(belt4)")
+  }
+
+  if(waste.isTouching(belt5) && waste.y > 625 && waste.y <= 800) {
+    waste.y = 700;
+    console.log("waste.isTouching(belt5)")
+  }
+ }
 
 function wasteDestroy() {
   if(waste.x >= 1700) {
