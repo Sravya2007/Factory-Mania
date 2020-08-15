@@ -188,7 +188,7 @@ function draw() {
   }
 
   //condition for gameState to be over
-  if(points < 5) {
+  if(points < -1) {
     gameState = "Over";
     textSize(40);
     fill("red");
