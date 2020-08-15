@@ -1,3 +1,4 @@
+//variable declaration
 var prodMachine;
 var prodImg;
 var belt1, belt2, belt3, belt4, belt5;
@@ -15,7 +16,10 @@ var points;
 var anim;
 var gameState = "Start";
 var fade, fadeAmount = 1;
+var level;
+var bg1, bg2, bg3, bg4, bg5;
 
+//preloading all the images
 function preload() {
   prodImg = loadImage("Images/Producing Machine.png");
 
@@ -41,10 +45,18 @@ function preload() {
 
   playerImg = loadImage("Images/PlayerImg.png");
   playerImg1 = loadImage("Images/playerImg1.png");
+
+  bg1 = loadImage("Images/FactoryBG1.jpg");
+  bg2 = loadImage("Images/FactoryBG2.jpg");
+  bg3 = loadImage("Images/FactoryBG3.jpg");
+  bg4 = loadImage("Images/FactoryBG4.jpg");
+  bg5 = loadImage("Images/FactoryBG5.jpg");
 }
 
 function setup() {
   createCanvas(1800, 800);
+
+  //creating all the sprites and assigning the values and properties
   
   waste = createSprite(500, 100);
   waste.addAnimation("bioImg", bioImg);
@@ -133,19 +145,67 @@ function setup() {
 }
 
 function draw() {
-  background("Black");
+  //making the backgroud as an image
+  background(bg1);
 
-  if(points < -2) {
+  //text properties for level
+  textSize(40);
+  fill("white");
+
+  //conditions for changing the background based on the levels
+  if(points <= 9 && points >= 0) {
+    noStroke();
+    stroke(2);
+    level = text("Level 1", 500, 50);
+  }
+
+  if(points <= 20 && points >= 10) {
+    noStroke();
+    stroke(2);
+    level = text("Level 2", 500, 50);
+    bg.addImage(bg2);
+  }
+
+  if(points <= 30 && points > 20) {
+    noStroke();
+    stroke(2);
+    level = text("Level 3", 500, 50);
+    bg.addImage(bg3);
+  }
+
+  if(points <= 40 && points > 30) {
+    noStroke();
+    stroke(2);
+    level = text("Level 4", 500, 50);
+    bg.addImage(bg4);
+  }
+
+  if(points <= 50 && points > 40) {
+    noStroke();
+    stroke(2);
+    level = text("Level 5", 500, 50);
+    bg.addImage(bg5);
+  }
+
+  //condition for gameState to be over
+  if(points < 5) {
     gameState = "Over";
+    textSize(40);
+    fill("red");
+    text("Game Over", 100, 50);
+    waste.velocityX = 0;
   }
 
   if(gameState === "Start") {
+
+    //condition for player to appear
     if(mouseX <= 1000 && mouseX >= 900 && mouseY >= 100 && mouseY <= 700) {
       player.x = mouseX;
       player.y = mouseY;
       player.visible = true;
     }
  
+    //condition for player to turn left and right
     if(mouseX < 900 && mouseX > 800) {
       player.addImage(playerImg);
       player.visible = true;
@@ -154,6 +214,7 @@ function draw() {
       player.visible = true;
     }
 
+    //conditions for assigning random images to the waste sprite and moving it
     if(frameCount === 100 ||wasteDestroy() === true) {     
 
       waste = createSprite(300, 400);
@@ -185,9 +246,8 @@ function draw() {
         default:
         break;
       }
-  
-    } 
     
+    //condition for opening and closing the lids
     if(frameCount % 100 < 100 && frameCount % 100 > 5) {
       openlid1.visible = true;
       openlid2.visible = true;
@@ -201,86 +261,86 @@ function draw() {
       openlid4.visible = false;
       openlid5.visible = false;
     }
-  
+ 
+    //condition to get the label of the animation of the waste sprite
     anim = waste.getAnimationLabel();
-  
-    if(anim === "bioImg" && (waste.x >= 1695 && waste.isTouching(bin1))) {
-      points++;
-    } else if((waste.x >= 1695 && waste.isTouching(bin1)) && anim !== "bioImg"){    
-      points = points - 1;
-    }
-  
-    if(anim === "glassImg" && (waste.x >= 1695 && waste.isTouching(bin2))) {  
-      points++;
-    } else if((waste.x >= 1695 && waste.isTouching(bin2)) && anim !== "glassImg"){    
-      points = points - 1;
-    }
-  
-    if(anim === "metalImg" && (waste.x >= 1695 && waste.isTouching(bin3))) {   
-      points++;
-    } else if((waste.x >= 1695 && waste.isTouching(bin3)) && anim !== "metalImg"){     
-      points = points - 1;
-    }
-  
-    if(anim === "paperImg" && (waste.x >= 1695 && waste.isTouching(bin4))) {   
-      points++;
-    } else if((waste.x >= 1695 && waste.isTouching(bin4)) && anim !== "paperImg"){    
-      points = points - 1;
-    }
-  
-    if(anim === "plasticImg" && (waste.x >= 1695 && waste.isTouching(bin5))) {    
-      points++;
-    } else if((waste.x >= 1695 && waste.isTouching(bin5)) && anim !== "plasticImg"){    
-      points = points - 1;
-    }
-  
-    textSize(40);
-    fill("White");
-    text("Score:" + " " + points, 100, 50);
+  }
+
+  //score conditions
+  if(anim === "bioImg" && (waste.x >= 1695 && waste.isTouching(bin1))) {
+    points++;
+
+  } else if((waste.x >= 1695 && waste.isTouching(bin1)) && anim !== "bioImg"){    
+    points = points - 1;
+  }
+
+  if(anim === "glassImg" && (waste.x >= 1695 && waste.isTouching(bin2))) {  
+    points++;
+
+  } else if((waste.x >= 1695 && waste.isTouching(bin2)) && anim !== "glassImg"){    
+    points = points - 1;
+  }
+
+  if(anim === "metalImg" && (waste.x >= 1695 && waste.isTouching(bin3))) {   
+    points++;
+    
+  } else if((waste.x >= 1695 && waste.isTouching(bin3)) && anim !== "metalImg"){     
+    points = points - 1;
+  }
+
+  if(anim === "paperImg" && (waste.x >= 1695 && waste.isTouching(bin4))) {   
+    points++;
+
+  } else if((waste.x >= 1695 && waste.isTouching(bin4)) && anim !== "paperImg"){    
+    points = points - 1;
+  }
+
+  if(anim === "plasticImg" && (waste.x >= 1695 && waste.isTouching(bin5))) {    
+    points++;
+
+  } else if((waste.x >= 1695 && waste.isTouching(bin5)) && anim !== "plasticImg"){    
+    points = points - 1;
+  }
+
+  //conditions to make SURE the belt touches the dustbin
+  if(waste.isTouching(belt1) && waste.y > -100 && waste.y <= 210) {
+    waste.y = 100;
+  }
+
+  if(waste.isTouching(belt2) && waste.y > 210 && waste.y <= 360) {
+    waste.y = 250;
+  }
+
+  if(waste.isTouching(beltExt3) && waste.y > 360 && waste.y <= 510) {
+    waste.y = 400;
+  }
+
+  if(waste.isTouching(belt4) && waste.y > 510 && waste.y <= 660) {
+    waste.y = 550;
+  }
+
+  if(waste.isTouching(belt5) && waste.y > 660 && waste.y <= 800) {
+    waste.y = 700;
   }
 
   drawSprites();
 
-  if(gameState === "Over") {
-    textSize(40);
-    fill("red");
-    text("Game Over", 100, 50);
-    waste.velocityX = 0;
-  }
+  //score display
+  textSize(40);
+  fill("Black");
+  text("Score:" + " " + points, 100, 50);
+}
 }
 
+//to carry the waste with the mouse till a limit
 function mouseDragged() {
+  if(waste.x < 1200) {
     waste.x = mouseX;
     waste.y = mouseY;
+  }
 }
 
-function mouseReleased() {
-  if(waste.isTouching(belt1) && waste.y > -100 && waste.y <= 175) {
-    waste.y = 100;
-    console.log("waste.isTouching(belt1)");
-  }
-
-  if(waste.isTouching(belt2) && waste.y > 175 && waste.y <= 325) {
-    waste.y = 250;
-    console.log("waste.isTouching(belt2)")
-  }
-
-  if(waste.isTouching(beltExt3) && waste.y > 325 && waste.y <= 475) {
-    waste.y = 400;
-    console.log("waste.isTouching(beltExt3)")
-  }
-
-  if(waste.isTouching(belt4) && waste.y > 475 && waste.y <= 625) {
-    waste.y = 550;
-    console.log("waste.isTouching(belt4)")
-  }
-
-  if(waste.isTouching(belt5) && waste.y > 625 && waste.y <= 800) {
-    waste.y = 700;
-    console.log("waste.isTouching(belt5)")
-  }
- }
-
+//destroys the waste
 function wasteDestroy() {
   if(waste.x >= 1700) {
     waste.destroy();
