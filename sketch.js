@@ -163,32 +163,32 @@ function draw() {
     noStroke();
     stroke(2);
     level = text("Level 2", 500, 50);
-    bg.addImage(bg2);
+    background(bg2);
   }
 
   if(points <= 30 && points > 20) {
     noStroke();
     stroke(2);
     level = text("Level 3", 500, 50);
-    bg.addImage(bg3);
+    background(bg3);
   }
 
   if(points <= 40 && points > 30) {
     noStroke();
     stroke(2);
     level = text("Level 4", 500, 50);
-    bg.addImage(bg4);
+    background(bg4);
   }
 
   if(points <= 50 && points > 40) {
     noStroke();
     stroke(2);
     level = text("Level 5", 500, 50);
-    bg.addImage(bg5);
+    background(bg5);
   }
 
   //condition for gameState to be over
-  if(points < 5) {
+  if(points < -1) {
     gameState = "Over";
     textSize(40);
     fill("red");
