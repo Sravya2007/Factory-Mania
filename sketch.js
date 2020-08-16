@@ -145,8 +145,6 @@ function setup() {
 }
 
 function draw() {
-  //making the backgroud as an image
-  background(bg1);
 
   //text properties for level
   textSize(40);
@@ -154,6 +152,8 @@ function draw() {
 
   //conditions for changing the background based on the levels
   if(points <= 9 && points >= 0) {
+    //making the backgroud as an image
+    background(bg1);
     noStroke();
     stroke(2);
     level = text("Level 1", 500, 50);
@@ -162,33 +162,33 @@ function draw() {
   if(points <= 20 && points >= 10) {
     noStroke();
     stroke(2);
-    level = text("Level 2", 500, 50);
     background(bg2);
+    level = text("Level 2", 500, 50);
   }
 
   if(points <= 30 && points > 20) {
     noStroke();
     stroke(2);
-    level = text("Level 3", 500, 50);
     background(bg3);
+    level = text("Level 3", 500, 50);
   }
 
   if(points <= 40 && points > 30) {
     noStroke();
     stroke(2);
-    level = text("Level 4", 500, 50);
     background(bg4);
+    level = text("Level 4", 500, 50);
   }
 
   if(points <= 50 && points > 40) {
     noStroke();
     stroke(2);
-    level = text("Level 5", 500, 50);
     background(bg5);
+    level = text("Level 5", 500, 50);
   }
 
   //condition for gameState to be over
-  if(points < -1) {
+  if(points < 0) {
     gameState = "Over";
     textSize(40);
     fill("red");
