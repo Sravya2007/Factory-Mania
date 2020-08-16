@@ -199,7 +199,7 @@ function draw() {
     gameState = "Over";
     textSize(40);
     fill("red");
-    text("Game Over", 100, 50);
+    text("Game Over", 100, 100);
     waste.velocityX = 0;
   }
 
