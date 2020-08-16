@@ -187,6 +187,13 @@ function draw() {
     level = text("Level 5", 500, 50);
   }
 
+  if(points > 50) {
+    background(bg1);
+    level = text("YOU WIN!", 500, 50);
+    gameState = "Over";
+    waste.velocityX = 0;
+  }
+
   //condition for gameState to be over
   if(points < 0) {
     gameState = "Over";
@@ -342,7 +349,7 @@ function mouseDragged() {
 
 //destroys the waste
 function wasteDestroy() {
-  if(waste.x >= 1700) {
+  if(waste.x >= 1720) {
     waste.destroy();
     return true;
   } else {
