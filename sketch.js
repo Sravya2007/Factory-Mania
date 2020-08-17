@@ -15,9 +15,10 @@ var player, playerImg, playerImg1;
 var points;
 var anim;
 var gameState = "Start";
-var fade, fadeAmount = 1;
 var level;
 var bg1, bg2, bg3, bg4, bg5;
+var song;
+var messageImg;
 
 //preloading all the images
 function preload() {
@@ -51,10 +52,16 @@ function preload() {
   bg3 = loadImage("Images/FactoryBG3.jpg");
   bg4 = loadImage("Images/FactoryBG4.jpg");
   bg5 = loadImage("Images/FactoryBG5.jpg");
+
+  song = loadSound("Sounds/acousticGuitar.mp3");
+
+  messageImg = loadImage("Images/messageImage.jpg"); 
 }
 
 function setup() {
-  createCanvas(1800, 800);
+  createCanvas(windowWidth, windowHeight);
+
+  song.play();
 
   //creating all the sprites and assigning the values and properties
   
@@ -139,13 +146,12 @@ function setup() {
   openlid5.visible = false;
   openlid5.addImage("openLid", openlid5Img);
 
-  player = createSprite(500, 500);
+  player = createSprite(1000, 400);
   player.visible = false;
   player.scale = 0.5;
 }
 
 function draw() {
-
   //text properties for level
   textSize(40);
   fill("white");
@@ -188,18 +194,20 @@ function draw() {
   }
 
   if(points > 50) {
-    background(bg1);
-    level = text("YOU WIN!", 500, 50);
+    background(messageImg);
+    fill("blue");
+    level = text("Good Job!", 100, 100);
     gameState = "Over";
     waste.velocityX = 0;
   }
 
   //condition for gameState to be over
   if(points < 0) {
+    background(messageImg);
     gameState = "Over";
     textSize(40);
     fill("red");
-    text("Game Over", 100, 100);
+    text("Sorry! Try again!", 100, 100);
     waste.velocityX = 0;
   }
 
@@ -334,13 +342,13 @@ function draw() {
 
   //score display
   textSize(40);
-  fill("Black");
+  fill("white");
   text("Score:" + " " + points, 100, 50);
 }
 }
 
 //to carry the waste with the mouse till a limit
-function mouseDragged() {
+function touchMoved() {
   if(waste.x < 1200) {
     waste.x = mouseX;
     waste.y = mouseY;
