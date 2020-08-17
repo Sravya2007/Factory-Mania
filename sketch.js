@@ -349,7 +349,10 @@ function mouseDragged() {
 
 //destroys the waste
 function wasteDestroy() {
-  if(waste.x >= 1720) {
+  if(waste.x > 1700) {
+    waste.visible = false;
+  }
+  if(waste.x >= 1725) {
     waste.destroy();
     return true;
   } else {
