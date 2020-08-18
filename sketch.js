@@ -351,7 +351,7 @@ function draw() {
 
 //to carry the waste with the mouse till a limit
 function touchMoved() {
-  if(waste.x < 1200) {
+  if(waste.x < 1200 && waste.x > 800) {
     waste.x = mouseX;
     waste.y = mouseY;
   }
