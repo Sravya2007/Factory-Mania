@@ -334,7 +334,7 @@ function draw() {
     waste.y = 550;
   }
 
-  if(waste.isTouching(belt5) && waste.y > 660 && waste.y <= 800) {
+  if(waste.y > 660) {
     waste.y = 700;
   }
 
