@@ -20,6 +20,8 @@ var bg1, bg2, bg3, bg4, bg5;
 var song;
 var messageImg;
 
+//width and height are 1920 and 969
+
 //preloading all the images
 function preload() {
   prodImg = loadImage("Images/Producing Machine.png");
@@ -282,60 +284,60 @@ function draw() {
   }
 
   //score conditions
-  if(anim === "bioImg" && (waste.x >= width + 45 && waste.isTouching(bin1))) {
+  if(anim === "bioImg" && (waste.x >= 1695 && waste.isTouching(bin1))) {
     points++;
 
-  } else if((waste.x >= width + 45 && waste.isTouching(bin1)) && anim !== "bioImg"){    
+  } else if((waste.x >= 1695 && waste.isTouching(bin1)) && anim !== "bioImg"){    
     points = points - 1;
   }
 
-  if(anim === "glassImg" && (waste.x >= width + 45 && waste.isTouching(bin2))) {  
+  if(anim === "glassImg" && (waste.x >= 1695 && waste.isTouching(bin2))) {  
     points++;
 
-  } else if((waste.x >= width + 45 && waste.isTouching(bin2)) && anim !== "glassImg"){    
+  } else if((waste.x >= 1695 && waste.isTouching(bin2)) && anim !== "glassImg"){    
     points = points - 1;
   }
 
-  if(anim === "metalImg" && (waste.x >= width + 45 && waste.isTouching(bin3))) {   
+  if(anim === "metalImg" && (waste.x >= 1695 && waste.isTouching(bin3))) {   
     points++;
     
-  } else if((waste.x >= width + 45 && waste.isTouching(bin3)) && anim !== "metalImg"){     
+  } else if((waste.x >= 1695 && waste.isTouching(bin3)) && anim !== "metalImg"){     
     points = points - 1;
   }
 
-  if(anim === "paperImg" && (waste.x >= width + 45 && waste.isTouching(bin4))) {   
+  if(anim === "paperImg" && (waste.x >= 1695 && waste.isTouching(bin4))) {   
     points++;
 
-  } else if((waste.x >= width + 45 && waste.isTouching(bin4)) && anim !== "paperImg"){    
+  } else if((waste.x >= 1695 && waste.isTouching(bin4)) && anim !== "paperImg"){    
     points = points - 1;
   }
 
-  if(anim === "plasticImg" && (waste.x >= width + 45 && waste.isTouching(bin5))) {    
+  if(anim === "plasticImg" && (waste.x >= 1695 && waste.isTouching(bin5))) {    
     points++;
 
-  } else if((waste.x >= width + 45 && waste.isTouching(bin5)) && anim !== "plasticImg"){    
+  } else if((waste.x >= 1695 && waste.isTouching(bin5)) && anim !== "plasticImg"){    
     points = points - 1;
   }
 
   //conditions to make SURE the belt touches the dustbin
-  if(waste.isTouching(belt1) && waste.y > height + 100 && waste.y <= height - 759) {
-    waste.y = height - 869;
+  if(waste.isTouching(belt1) && waste.y > -100 && waste.y <= 210) {
+    waste.y = 100;
   }
 
-  if(waste.isTouching(belt2) && waste.y > height - 759 && waste.y <= height - 609) {
-    waste.y = height - 719;
+  if(waste.isTouching(belt2) && waste.y > 210 && waste.y <= 360) {
+    waste.y = 250;
   }
 
-  if(waste.isTouching(beltExt3) && waste.y > height - 609 && waste.y <= height - 459) {
-    waste.y = height - 569;
+  if(waste.isTouching(beltExt3) && waste.y > 360 && waste.y <= 510) {
+    waste.y = 400;
   }
 
-  if(waste.isTouching(belt4) && waste.y > height - 459 && waste.y <= height - 309) {
-    waste.y = height - 429;
+  if(waste.isTouching(belt4) && waste.y > 510 && waste.y <= 660) {
+    waste.y = 550;
   }
 
-  if(waste.y > height - 309) {
-    waste.y = height - 269;
+  if(waste.y > 660) {
+    waste.y = 700;
   }
 
   drawSprites();
@@ -343,13 +345,13 @@ function draw() {
   //score display
   textSize(40);
   fill("white");
-  text("Score:" + " " + points, width - 1820, height - 919);
+  text("Score:" + " " + points, 100, 50);
 }
 }
 
 //to carry the waste with the mouse till a limit
 function touchMoved() {
-  if(waste.x < width - 720) {
+  if(waste.x < 1200) {
     waste.x = mouseX;
     waste.y = mouseY;
   }
@@ -357,10 +359,10 @@ function touchMoved() {
 
 //destroys the waste
 function wasteDestroy() {
-  if(waste.x > width - 220) {
+  if(waste.x > 1700) {
     waste.visible = false;
   }
-  if(waste.x >= width - 195) {
+  if(waste.x >= 1725) {
     waste.destroy();
     return true;
   } else {
