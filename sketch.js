@@ -59,7 +59,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(displayWidth, displayHeight);
+  createCanvas(100, 100);
+  windowResized();
 
   song.play();
 
@@ -362,4 +363,8 @@ function wasteDestroy() {
   } else {
     return false;
   }
+}
+
+function windowResized() { 
+  resizeCanvas(windowWidth, windowHeight); 
 }
