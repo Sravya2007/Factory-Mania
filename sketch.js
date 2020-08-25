@@ -2,7 +2,7 @@
 var prodMachine;
 var prodImg;
 var belt1, belt2, belt3, belt4, belt5;
-var beltExt3;
+var beltExt;
 var beltImg;
 var bin1, bin2, bin3, bin4, bin5;
 var binImg1, binImg2, binImg3, binImg4, binImg5;
@@ -65,87 +65,87 @@ function setup() {
   song.play();
 
   //creating all the sprites and assigning the values and properties
-  //displayWidth = 2920, displayHeight = 1080
   
   waste = createSprite(500, 100);
   waste.addAnimation("bioImg", bioImg);
   waste.visible = false;
 
-  prodMachine = createSprite(displayWidth - 1780, displayHeight - 680);
+  prodMachine = createSprite(windowWidth/2 - 700, windowHeight/2);
   prodMachine.addImage(prodImg);
-  prodMachine.scale = 1;
+  prodMachine.scale = windowWidth/1200;
   angleMode(DEGREES);
   prodMachine.rotation = 90;
 
   points = 0;
 
-  belt1 = createSprite(displayWidth - 570, displayHeight - 980);//100
+  beltExt = createSprite(windowWidth/2 - 300, windowHeight/2);//100
+  beltExt.addImage("beltImg", beltImg);
+  beltExt.scale = windowWidth/1200;
+  prodMachine.depth = beltExt.depth + 1;
+
+  belt1 = createSprite(windowWidth/2 + 500, windowHeight/2 - 400);//400
   belt1.addImage("beltImg", beltImg);
-  belt1.scale = 1.5;
+  belt1.scale = windowWidth/1200;
 
-  belt2 = createSprite(displayWidth - 570, displayHeight - 830);//250
+  belt2 = createSprite(belt1.x, belt1.y + 200);//250
   belt2.addImage("beltImg", beltImg);
-  belt2.scale = 1.5;
+  belt2.scale = windowWidth/1200;
 
-  belt3 = createSprite(displayWidth - 1350, displayHeight - 680);//400
+  belt3 = createSprite(belt1.x, windowHeight/2);//400
   belt3.addImage("beltImg", beltImg);
-  belt3.scale = 1.5;
+  belt3.scale = windowWidth/1200;
 
-  beltExt3 = createSprite(displayWidth - 570, displayHeight - 680);//400
-  beltExt3.addImage("beltImg", beltImg);
-  beltExt3.scale = 1.5;
-
-  belt4 = createSprite(displayWidth - 570, displayHeight - 530);//550
+  belt4 = createSprite(belt1.x, belt3.y + 200);//550
   belt4.addImage("beltImg", beltImg);
-  belt4.scale = 1.5;
+  belt4.scale = windowWidth/1200;
 
-  belt5 = createSprite(displayWidth - 570, displayHeight - 380);//700
+  belt5 = createSprite(belt1.x, belt4.y + 200);//700
   belt5.addImage("beltImg", beltImg);
-  belt5.scale = 1.5;
+  belt5.scale = windowWidth/1200;
 
-  bin1 = createSprite(displayWidth - 220, displayHeight - 980);
+  bin1 = createSprite(belt1.x + 365, belt1.y);
   bin1.addImage("binImg", binImg1);
-  bin1.scale = 0.8;
+  bin1.scale = windowWidth/2500;
 
-  bin2 = createSprite(displayWidth - 220, displayHeight - 830);
+  bin2 = createSprite(belt1.x + 365, belt2.y);
   bin2.addImage("binImg", binImg2);
-  bin2.scale = 0.8;
+  bin2.scale = windowWidth/2500;
 
-  bin3 = createSprite(displayWidth - 220, displayHeight - 680);
+  bin3 = createSprite(belt1.x + 365, belt3.y);
   bin3.addImage("binImg", binImg3);
-  bin3.scale = 0.8;
+  bin3.scale = windowWidth/2500;
 
-  bin4 = createSprite(displayWidth - 220, displayHeight - 530);
+  bin4 = createSprite(belt1.x + 365, belt4.y);
   bin4.addImage("binImg", binImg4);
-  bin4.scale = 0.8;
+  bin4.scale = windowWidth/2500;
 
-  bin5 = createSprite(displayWidth - 220, displayHeight - 380);
+  bin5 = createSprite(belt1.x + 365, belt5.y);
   bin5.addImage("binImg", binImg5);
-  bin5.scale = 0.8;
+  bin5.scale = windowWidth/2500;
 
-  openlid1 = createSprite(displayWidth - 220, displayHeight - 1000);
+  openlid1 = createSprite(belt1.x + 365, belt1.y - 20);
   openlid1.visible = false;
   openlid1.addImage("openLid", openlid1Img);
 
-  openlid2 = createSprite(displayWidth - 220, displayHeight - 850);
+  openlid2 = createSprite(belt1.x + 365, belt2.y - 20);
   openlid2.visible = false;
   openlid2.addImage("openLid", openlid2Img);
 
-  openlid3 = createSprite(displayWidth - 220, displayHeight - 700);
+  openlid3 = createSprite(belt1.x + 365, belt3.y - 20);
   openlid3.visible = false;
   openlid3.addImage("openLid", openlid3Img);
 
-  openlid4 = createSprite(displayWidth - 220, displayHeight - 550);
+  openlid4 = createSprite(belt1.x + 365, belt4.y - 20);
   openlid4.visible = false;
   openlid4.addImage("openLid", openlid4Img);
 
-  openlid5 = createSprite(displayWidth - 220, displayHeight - 400);
+  openlid5 = createSprite(belt1.x + 365, belt5.y - 20);
   openlid5.visible = false;
   openlid5.addImage("openLid", openlid5Img);
 
-  player = createSprite(displayWidth - 1000, displayHeight - 680);
+  player = createSprite(beltExt.x + 400, beltExt.y);
   player.visible = false;
-  player.scale = 0.5;
+  player.scale = windowWidth/3000;
 }
 
 function draw() {
@@ -159,41 +159,41 @@ function draw() {
     background(bg1);
     noStroke();
     stroke(2);
-    level = text("Level 1", displayWidth - 1500, displayHeight - 1030);
+    level = text("Level 1", windowWidth/2 - 500, windowHeight/2 - 430);
   }
 
   if(points <= 20 && points >= 10) {
     noStroke();
     stroke(2);
     background(bg2);
-    level = text("Level 2", displayWidth - 1500, displayHeight - 1030);
+    level = text("Level 2", windowWidth/2 - 500, windowHeight/2 - 430);
   }
 
   if(points <= 30 && points > 20) {
     noStroke();
     stroke(2);
     background(bg3);
-    level = text("Level 3", displayWidth - 1500, displayHeight - 1030);
+    level = text("Level 3", windowWidth/2 - 500, windowHeight/2 - 430);
   }
 
   if(points <= 40 && points > 30) {
     noStroke();
     stroke(2);
     background(bg4);
-    level = text("Level 4", displayWidth - 1500, displayHeight - 1030);
+    level = text("Level 4", windowWidth/2 - 500, windowHeight/2 - 430);
   }
 
   if(points <= 50 && points > 40) {
     noStroke();
     stroke(2);
     background(bg5);
-    level = text("Level 5", displayWidth - 1500, displayHeight - 1030);
+    level = text("Level 5", windowWidth/2 - 500, windowHeight/2 - 430);
   }
 
   if(points > 50) {
     background(messageImg);
     fill("blue");
-    level = text("Good Job!", displayWidth - 1800, displayHeight - 980);
+    level = text("Good Job!", windowWidth/2 - 900, windowHeight/2 - 300);
     gameState = "Over";
     waste.velocityX = 0;
   }
@@ -204,24 +204,23 @@ function draw() {
     gameState = "Over";
     textSize(40);
     fill("red");
-    text("Sorry! Try again!", displayWidth - 1800, displayHeight - 980);
+    text("Sorry! Try again!", windowWidth/2 - 900, windowHeight/2 - 300);
     waste.velocityX = 0;
   }
 
   if(gameState === "Start") {
 
     //condition for player to appear
-    if(mouseX <= belt1.y + 900 && mouseX >= belt1.y + 800 && mouseY >= belt1.y && mouseY <= belt1.y + 600) {
-      player.x = mouseX;
-      player.y = mouseY;
-      player.visible = true;
+    if(mouseX >= beltExt.x + 300 && mouseX <= beltExt.x + 500 && mouseY > belt1.y && mouseY < belt5.y) {
+      player.x = World.mouseX;
+      player.y = World.mouseY;
     }
  
     //condition for player to turn left and right
-    if(mouseX < belt1.y + 800 && mouseX > belt1.y + 700) {
+    if(mouseX < beltExt.x + 400 && mouseX > beltExt.x + 300) {
       player.addImage(playerImg);
       player.visible = true;
-    } else if(mouseX < belt1.y + 900 && mouseX > belt1.y + 800){
+    } else if(mouseX < beltExt.x + 500 && mouseX > beltExt.x + 400){
       player.addImage(playerImg1);
       player.visible = true;
     }
@@ -229,9 +228,10 @@ function draw() {
     //conditions for assigning random images to the waste sprite and moving it
     if(frameCount === 100 ||wasteDestroy() === true) {     
 
-      waste = createSprite(belt1.y + 200, belt1.y + 300);
-      waste.scale = 0.8;
+      waste = createSprite(beltExt.y - 100, beltExt.y);
+      waste.scale = windowWidth/2300;
       waste.velocityX = 6 + 3*points/5;
+      prodMachine.depth = waste.depth + 1;
     
       rand = Math.round(random(1, 5));
       switch(rand) {
@@ -258,8 +258,12 @@ function draw() {
         default:
         break;
       }
-    
-    //condition for opening and closing the lids
+ 
+    //condition to get the label of the animation of the waste sprite
+    anim = waste.getAnimationLabel();
+  }
+
+  //condition for opening and closing the lids
     if(frameCount % 100 < 100 && frameCount % 100 > 5) {
       openlid1.visible = true;
       openlid2.visible = true;
@@ -273,65 +277,65 @@ function draw() {
       openlid4.visible = false;
       openlid5.visible = false;
     }
- 
-    //condition to get the label of the animation of the waste sprite
-    anim = waste.getAnimationLabel();
-  }
 
   //score conditions
-  if(anim === "bioImg" && (waste.x >= bin1.x - 10 && waste.isTouching(bin1))) {
+  if(anim === "bioImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin1))) {
     points++;
 
-  } else if((waste.x >= bin1.x - 10 && waste.isTouching(bin1)) && anim !== "bioImg"){    
+  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin1)) && anim !== "bioImg"){    
     points = points - 1;
   }
 
-  if(anim === "glassImg" && (waste.x >= bin1.x - 10 && waste.isTouching(bin2))) {  
+  if(anim === "glassImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin2))) {  
     points++;
 
-  } else if((waste.x >= bin1.x - 10 && waste.isTouching(bin2)) && anim !== "glassImg"){    
+  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin2)) && anim !== "glassImg"){    
     points = points - 1;
   }
 
-  if(anim === "metalImg" && (waste.x >= bin1.x - 10 && waste.isTouching(bin3))) {   
+  if(anim === "metalImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin3))) {   
     points++;
     
-  } else if((waste.x >= bin1.x - 10 && waste.isTouching(bin3)) && anim !== "metalImg"){     
+  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin3)) && anim !== "metalImg"){     
     points = points - 1;
   }
 
-  if(anim === "paperImg" && (waste.x >= bin1.x - 10 && waste.isTouching(bin4))) {   
+  if(anim === "paperImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin4))) {   
     points++;
 
-  } else if((waste.x >= bin1.x - 10 && waste.isTouching(bin4)) && anim !== "paperImg"){    
+  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin4)) && anim !== "paperImg"){    
     points = points - 1;
   }
 
-  if(anim === "plasticImg" && (waste.x >= bin1.x - 10 && waste.isTouching(bin5))) {    
+  if(anim === "plasticImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin5))) {    
     points++;
 
-  } else if((waste.x >= bin1.x - 10 && waste.isTouching(bin5)) && anim !== "plasticImg"){    
+  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin5)) && anim !== "plasticImg"){    
     points = points - 1;
   }
 
   //conditions to make SURE the belt touches the dustbin
-  if(waste.isTouching(belt1) && waste.y > belt1.y*-1 && waste.y <= belt1.y + 110) {
+  if(waste.isTouching(belt1) && waste.y > belt1.y - 500 && waste.y <= belt1.y + 160) {
     waste.y = belt1.y;
   }
 
-  if(waste.isTouching(belt2) && waste.y > belt1.y + 110 && waste.y <= belt1.y + 250) {
+  if(waste.isTouching(belt2) && waste.y > belt1.y + 160 && waste.y <= belt2.y + 160) {
     waste.y = belt2.y;
   }
 
-  if(waste.isTouching(beltExt3) && waste.y > belt1.y + 250 && waste.y <= belt1.y + 410) {
-    waste.y = beltExt3.y;
+  if(waste.isTouching(beltExt) && waste.y > belt2.y + 160 && waste.y <= beltExt.y + 160) {
+    waste.y = beltExt.y;
   }
 
-  if(waste.isTouching(belt4) && waste.y > belt1.y + 410 && waste.y <= belt1.y + 560) {
+  if(waste.isTouching(belt3) && waste.y > belt2.y + 160 && waste.y <= belt3.y + 160) {
+    waste.y = belt3.y;
+  }
+
+  if(waste.isTouching(belt4) && waste.y > belt3.y + 160 && waste.y <= belt4.y + 160) {
     waste.y = belt4.y;
   }
 
-  if(waste.y > belt1.y + 560) {
+  if(waste.y > belt4.y + 150) {
     waste.y = belt5.y;
   }
 
@@ -340,7 +344,7 @@ function draw() {
   //score display
   textSize(40);
   fill("white");
-  text("Score:" + " " + points, belt1.y, belt1.y - 50);
+  text("Score:" + " " + points, windowWidth/2 - 900, windowHeight/2 - 430);
 }
 }
 
@@ -354,10 +358,10 @@ function touchMoved() {
 
 //destroys the waste
 function wasteDestroy() {
-  if(waste.x > belt1.y + 1600) {
+  if(waste.x > bin1.x - 15) {
     waste.visible = false;
   }
-  if(waste.x >= belt1.y + 1625) {
+  if(waste.x >= bin1.x - 10) {
     waste.destroy();
     return true;
   } else {
@@ -365,6 +369,7 @@ function wasteDestroy() {
   }
 }
 
+//canvas will fit on any device
 function windowResized() { 
   resizeCanvas(windowWidth, windowHeight); 
 }
