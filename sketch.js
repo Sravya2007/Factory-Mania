@@ -18,7 +18,7 @@ var gameState = "Start";
 var level;
 var bg1, bg2, bg3, bg4, bg5;
 var song;
-var messageImg;
+var messageImg, messageImg1;
 
 //preloading all the images
 function preload() {
@@ -56,6 +56,7 @@ function preload() {
   song = loadSound("Sounds/acousticGuitar.mp3");
 
   messageImg = loadImage("Images/messageImage.jpg"); 
+  messageImg1 = loadImage("Images/messageImage1.jpg"); 
 }
 
 function setup() {
@@ -70,7 +71,19 @@ function setup() {
   waste.addAnimation("bioImg", bioImg);
   waste.visible = false;
 
-  prodMachine = createSprite(windowWidth/2 - 700, windowHeight/2);
+  belt1 = createSprite(windowWidth/2 + 500, windowHeight/2 - 350);
+  belt1.addImage("beltImg", beltImg);
+  belt1.scale = windowWidth/1200;
+
+  belt2 = createSprite(belt1.x, belt1.y + 150);
+  belt2.addImage("beltImg", beltImg);
+  belt2.scale = windowWidth/1200;
+
+  belt3 = createSprite(belt1.x, belt2.y + 150);
+  belt3.addImage("beltImg", beltImg);
+  belt3.scale = windowWidth/1200;
+
+  prodMachine = createSprite(windowWidth/2 - 700, belt3.y);
   prodMachine.addImage(prodImg);
   prodMachine.scale = windowWidth/1200;
   angleMode(DEGREES);
@@ -78,28 +91,16 @@ function setup() {
 
   points = 0;
 
-  beltExt = createSprite(windowWidth/2 - 300, windowHeight/2);//100
+  beltExt = createSprite(windowWidth/2 - 300, belt3.y);
   beltExt.addImage("beltImg", beltImg);
   beltExt.scale = windowWidth/1200;
   prodMachine.depth = beltExt.depth + 1;
 
-  belt1 = createSprite(windowWidth/2 + 500, windowHeight/2 - 400);//400
-  belt1.addImage("beltImg", beltImg);
-  belt1.scale = windowWidth/1200;
-
-  belt2 = createSprite(belt1.x, belt1.y + 200);//250
-  belt2.addImage("beltImg", beltImg);
-  belt2.scale = windowWidth/1200;
-
-  belt3 = createSprite(belt1.x, windowHeight/2);//400
-  belt3.addImage("beltImg", beltImg);
-  belt3.scale = windowWidth/1200;
-
-  belt4 = createSprite(belt1.x, belt3.y + 200);//550
+  belt4 = createSprite(belt1.x, belt3.y + 150);
   belt4.addImage("beltImg", beltImg);
   belt4.scale = windowWidth/1200;
 
-  belt5 = createSprite(belt1.x, belt4.y + 200);//700
+  belt5 = createSprite(belt1.x, belt4.y + 150);
   belt5.addImage("beltImg", beltImg);
   belt5.scale = windowWidth/1200;
 
@@ -191,9 +192,7 @@ function draw() {
   }
 
   if(points > 50) {
-    background(messageImg);
-    fill("blue");
-    level = text("Good Job!", windowWidth/2 - 900, windowHeight/2 - 300);
+    background(messageImg1);
     gameState = "Over";
     waste.velocityX = 0;
   }
@@ -203,8 +202,6 @@ function draw() {
     background(messageImg);
     gameState = "Over";
     textSize(40);
-    fill("red");
-    text("Sorry! Try again!", windowWidth/2 - 900, windowHeight/2 - 300);
     waste.velocityX = 0;
   }
 
@@ -279,63 +276,63 @@ function draw() {
     }
 
   //score conditions
-  if(anim === "bioImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin1))) {
+  if(anim === "bioImg" && (waste.x >= bin1.x - 50 && waste.isTouching(bin1))) {
     points++;
 
-  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin1)) && anim !== "bioImg"){    
+  } else if((waste.x >= bin1.x - 50 && waste.isTouching(bin1)) && anim !== "bioImg"){    
     points = points - 1;
   }
 
-  if(anim === "glassImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin2))) {  
+  if(anim === "glassImg" && (waste.x >= bin1.x - 50 && waste.isTouching(bin2))) {  
     points++;
 
-  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin2)) && anim !== "glassImg"){    
+  } else if((waste.x >= bin1.x - 50 && waste.isTouching(bin2)) && anim !== "glassImg"){    
     points = points - 1;
   }
 
-  if(anim === "metalImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin3))) {   
+  if(anim === "metalImg" && (waste.x >= bin1.x - 50 && waste.isTouching(bin3))) {   
     points++;
     
-  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin3)) && anim !== "metalImg"){     
+  } else if((waste.x >= bin1.x - 50 && waste.isTouching(bin3)) && anim !== "metalImg"){     
     points = points - 1;
   }
 
-  if(anim === "paperImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin4))) {   
+  if(anim === "paperImg" && (waste.x >= bin1.x - 50 && waste.isTouching(bin4))) {   
     points++;
 
-  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin4)) && anim !== "paperImg"){    
+  } else if((waste.x >= bin1.x - 50 && waste.isTouching(bin4)) && anim !== "paperImg"){    
     points = points - 1;
   }
 
-  if(anim === "plasticImg" && (waste.x >= bin1.x - 40 && waste.isTouching(bin5))) {    
+  if(anim === "plasticImg" && (waste.x >= bin1.x - 50 && waste.isTouching(bin5))) {    
     points++;
 
-  } else if((waste.x >= bin1.x - 40 && waste.isTouching(bin5)) && anim !== "plasticImg"){    
+  } else if((waste.x >= bin1.x - 50 && waste.isTouching(bin5)) && anim !== "plasticImg"){    
     points = points - 1;
   }
 
   //conditions to make SURE the belt touches the dustbin
-  if(waste.isTouching(belt1) && waste.y > belt1.y - 500 && waste.y <= belt1.y + 160) {
+  if(waste.isTouching(belt1) && waste.y > belt1.y - 500 && waste.y <= belt1.y + 100) {
     waste.y = belt1.y;
   }
 
-  if(waste.isTouching(belt2) && waste.y > belt1.y + 160 && waste.y <= belt2.y + 160) {
+  if(waste.isTouching(belt2) && waste.y > belt1.y + 100 && waste.y <= belt2.y + 100) {
     waste.y = belt2.y;
   }
 
-  if(waste.isTouching(beltExt) && waste.y > belt2.y + 160 && waste.y <= beltExt.y + 160) {
+  if(waste.isTouching(beltExt) && waste.y > belt2.y + 100 && waste.y <= beltExt.y + 100) {
     waste.y = beltExt.y;
   }
 
-  if(waste.isTouching(belt3) && waste.y > belt2.y + 160 && waste.y <= belt3.y + 160) {
+  if(waste.isTouching(belt3) && waste.y > belt2.y + 100 && waste.y <= belt3.y + 100) {
     waste.y = belt3.y;
   }
 
-  if(waste.isTouching(belt4) && waste.y > belt3.y + 160 && waste.y <= belt4.y + 160) {
+  if(waste.isTouching(belt4) && waste.y > belt3.y + 100 && waste.y <= belt4.y + 100) {
     waste.y = belt4.y;
   }
 
-  if(waste.y > belt4.y + 150) {
+  if(waste.y > belt4.y + 100) {
     waste.y = belt5.y;
   }
 
