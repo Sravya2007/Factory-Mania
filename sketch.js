@@ -60,8 +60,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(100, 100);
-  windowResized();
+  createCanvas(windowWidth, windowHeight);
+  /*windowResized();*/
 
   song.play();
 
